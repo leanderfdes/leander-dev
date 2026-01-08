@@ -119,17 +119,21 @@ gsap.from(".experience-card", {
   ease: "power2.out"
 });
 
-gsap.from(".education-card", {
-  scrollTrigger: {
-    trigger: ".education-list",
-    start: "top 85%",
-    once: true
-  },
-  opacity: 0,
-  y: 24,
-  duration: 0.6,
-  ease: "power2.out"
-});
+gsap.fromTo(
+  ".education-card",
+  { opacity: 0, y: 24 },
+  {
+    opacity: 1,
+    y: 0,
+    duration: 0.6,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: ".education-card",
+      start: "top 85%",
+      once: true
+    }
+  }
+);
 
 gsap.from(".contact-content", {
   scrollTrigger: {
