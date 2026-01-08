@@ -1,0 +1,28 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 64 64"
+>
+  <!-- Background -->
+  <rect width="64" height="64" rx="12" fill="#0F172A"/>
+
+  <!-- Big, bold L -->
+  <text
+    x="25"
+    y="50"
+    text-anchor="middle"
+    font-size="56"
+    font-weight="600"
+    font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif"
+    fill="#E2E8F0"
+  >
+    L
+  </text>
+
+  <!-- Subtle dot -->
+  <circle
+    cx="48"
+    cy="50"
+    r="4.0"
+    fill="#38BDF8"
+  />
+</svg>
