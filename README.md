@@ -16,7 +16,7 @@ A **premium, immersive personal portfolio website** built to showcase my work as
 
 This portfolio focuses on **clarity, performance, and recruiter experience**, featuring a calm dark theme, smooth micro-interactions, and a production-ready structure.
 
-🔗 **Live Site:** https://portfolio.vercel.app  
+🔗 **Live Site:** https://portfolio-lovat-tau-94.vercel.app/  
 📄 **Resume:** Available directly on the website
 
 ---
