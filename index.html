@@ -443,6 +443,84 @@
   </div>
 </article>
 
+<!-- PROJECT: CineVault = Queue-Powered Movie Discovery Platform -->
+<article class="project-card">
+  <div class="project-layer project-summary">
+    <h3 class="project-title">
+      CineVault
+      <span class="project-meta">CineVault = Queue-Powered Movie Discovery Platform · Feb 2026</span>
+    </h3>
+
+    <p class="project-impact">
+      A production-grade movie discovery platform powered by a self-updating
+      database pipeline. Features a decoupled background worker for processing
+      massive datasets and a high-performance, cinematic frontend.
+    </p>
+
+    <div class="project-tech">
+      <span>React (Vite)</span>
+      <span>Node.js</span>
+      <span>MongoDB</span>
+      <span>Redis</span>
+      <span>BullMQ</span>
+      <span>Framer Motion</span>
+      <span>Tailwind CSS</span>
+      <span>Render</span>
+    </div>
+
+    <div class="project-actions">
+      <a
+        href="https://cinevault-ten.vercel.app/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="project-link"
+      >
+        Live Demo
+      </a>
+      <a 
+        href="https://github.com/leanderfdes/Cinevault" 
+        target="_blank"
+        rel="noopener noreferrer"
+        class="project-link"
+      >
+        GitHub
+      </a>
+      <button class="project-expand">Details</button>
+    </div>
+  </div>
+
+  <div class="project-layer project-details">
+    <ul>
+      <li>
+        <strong>Distributed Architecture:</strong> Designed a decoupled system with a
+        FastAPI/Express REST API and a dedicated <strong>Background Worker</strong>
+        running on Render to handle heavy data processing without blocking the UI.
+      </li>
+      <li>
+        <strong>ETL Data Pipeline:</strong> Engineered a <strong>Redis + BullMQ</strong>
+        job queue to parse massive IMDb TSV datasets (millions of rows) and
+        synchronize metadata with TMDB APIs in real-time.
+      </li>
+      <li>
+        <strong>Advanced UI Engineering:</strong> Built a polished interface using
+        <strong>Framer Motion</strong> for 3D card tilts and implemented
+        <strong>React Portals</strong> to solve complex mobile viewport clipping
+        issues for modal overlays.
+      </li>
+      <li>
+        <strong>Performance & Caching:</strong> Integrated TanStack Query for
+        server-state management, caching, and optimistic updates to ensure
+        instant interactions.
+      </li>
+      <li>
+        <strong>Production Security:</strong> Implemented robust security practices
+        including JWT authentication, dynamic CORS whitelisting for Vercel
+        previews, and environment-based configuration.
+      </li>
+    </ul>
+  </div>
+</article>
+
 
       <!-- PROJECT: Drowsiness Detection System -->
 <article class="project-card">
