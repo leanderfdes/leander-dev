@@ -18,6 +18,10 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/noise.css">
+  <link rel="stylesheet" href="css/cursor.css">
+  <link rel="stylesheet" href="css/kinetic.css">
+  <link rel="stylesheet" href="css/devmode.css">
 
   <link
   rel="stylesheet"
@@ -25,6 +29,13 @@
 />
 </head>
 <body>
+
+<!-- CURSOR -->
+<div class="cursor-dot" id="cursor-dot"></div>
+<div class="cursor-outline" id="cursor-outline"></div>
+
+<!-- NOISE OVERLAY -->
+<div class="noise-overlay"></div>
 
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
@@ -40,6 +51,11 @@
         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
         <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <li class="nav-item">
+          <button id="dev-mode-toggle" class="dev-toggle-btn" aria-label="Toggle Developer Mode" title="Toggle Terminal Mode">
+            <i data-lucide="terminal"></i>
+          </button>
+        </li>
       </ul>
     </div>
   </div>
@@ -108,6 +124,18 @@
 
 </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- KINETIC TYPOGRAPHY SCROLL -->
+<section class="kinetic-section">
+  <div class="kinetic-track">
+    <div class="kinetic-text">
+      BUILDING <span>LLM</span> SYSTEMS · SCALABLE <span>FASTAPI</span> BACKENDS · REAL-TIME <span>COMPUTER VISION</span> ·
+    </div>
+    <div class="kinetic-text">
+      BUILDING <span>LLM</span> SYSTEMS · SCALABLE <span>FASTAPI</span> BACKENDS · REAL-TIME <span>COMPUTER VISION</span> ·
     </div>
   </div>
 </section>
