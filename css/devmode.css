@@ -1,0 +1,69 @@
+/* ======================================================
+   DEVELOPER MODE EASTER EGG
+====================================================== */
+body.dev-mode {
+  --bg-base: #050505;
+  --bg-surface: #0a0a0a;
+  --text-primary: #00ff41;
+  --text-secondary: #008f11;
+  --text-muted: #003b00;
+  --border-subtle: #00ff41;
+  --accent: #00ff41;
+
+  font-family: 'Courier New', Courier, monospace;
+}
+
+body.dev-mode * {
+  border-radius: 0 !important;
+}
+
+body.dev-mode .noise-overlay {
+  opacity: 0.15;
+}
+
+body.dev-mode .project-card,
+body.dev-mode .experience-card,
+body.dev-mode .education-card,
+body.dev-mode .skill-card {
+  background: transparent !important;
+  border: 1px solid var(--accent) !important;
+  box-shadow: none !important;
+}
+
+body.dev-mode .hero-section {
+  background: transparent !important;
+}
+
+body.dev-mode .kinetic-text {
+  -webkit-text-stroke: 1px var(--accent);
+}
+
+body.dev-mode .kinetic-text span {
+  color: var(--accent);
+}
+
+body.dev-mode .navbar {
+  background: #000000;
+  border-bottom: 1px solid var(--accent);
+}
+
+/* Terminal Toggle Button */
+.dev-toggle-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+}
+
+.dev-toggle-btn:hover {
+  color: var(--accent);
+}
+
+body.dev-mode .dev-toggle-btn {
+  color: var(--accent);
+}

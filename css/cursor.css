@@ -1,0 +1,65 @@
+body {
+  cursor: none; /* Hide default cursor */
+}
+
+/* Base custom cursor styling */
+.cursor-dot,
+.cursor-outline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* transform: translate(-50%, -50%); handled by offset in js */
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent);
+  transition: opacity 0.3s ease;
+}
+
+.cursor-outline {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--text-secondary);
+  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Hover state for links and buttons */
+.cursor-hover .cursor-outline {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: var(--accent);
+}
+
+.cursor-hover .cursor-dot {
+  opacity: 0.5;
+}
+
+/* Developer Mode styling for cursor */
+body.dev-mode .cursor-dot {
+  background-color: #00FF41; /* Terminal green */
+}
+body.dev-mode .cursor-outline {
+  border-color: rgba(0, 255, 65, 0.5);
+  border-radius: 0; /* Square cursor for terminal feel */
+}
+body.dev-mode .cursor-hover .cursor-outline {
+  background-color: rgba(0, 255, 65, 0.1);
+  border-color: #00FF41;
+}
+
+/* Ensure default cursor returns on touch devices (they don't use hover) */
+@media (hover: none) and (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+  .cursor-dot,
+  .cursor-outline {
+    display: none;
+  }
+}

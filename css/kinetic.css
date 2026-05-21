@@ -1,0 +1,34 @@
+/* ======================================================
+   KINETIC TYPOGRAPHY SECTION
+====================================================== */
+.kinetic-section {
+  padding: 80px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  background: linear-gradient(90deg, rgba(255,255,255,0.02), transparent 20%, transparent 80%, rgba(255,255,255,0.02));
+}
+
+.kinetic-text {
+  font-size: 5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-secondary);
+  display: inline-block;
+  padding-right: 50px;
+  letter-spacing: 2px;
+}
+
+.kinetic-text span {
+  color: var(--text-primary);
+  -webkit-text-stroke: 0;
+}
+
+/* Make sure the container holds duplicates for smooth looping */
+.kinetic-track {
+  display: inline-flex;
+}

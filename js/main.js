@@ -148,3 +148,142 @@ gsap.from(".contact-content", {
 });
 
 document.getElementById("year").textContent = new Date().getFullYear();
+
+// ======================================================
+// CUSTOM CURSOR & MAGNETIC BUTTONS
+// ======================================================
+document.addEventListener("DOMContentLoaded", () => {
+  const cursorDot = document.getElementById("cursor-dot");
+  const cursorOutline = document.getElementById("cursor-outline");
+
+  if (!cursorDot || !cursorOutline) return;
+
+  // Track mouse coordinates
+  window.addEventListener("mousemove", (e) => {
+    const posX = e.clientX;
+    const posY = e.clientY;
+
+    // Dot follows exactly, offsetting for center
+    cursorDot.style.left = `${posX - 4}px`;
+    cursorDot.style.top = `${posY - 4}px`;
+
+    // Outline follows with a slight delay using GSAP
+    gsap.to(cursorOutline, {
+      x: posX - 20, // offset half the width
+      y: posY - 20, // offset half the height
+      duration: 0.15,
+      ease: "power2.out"
+    });
+  });
+
+  // Add hover effects for all interactive elements
+  const interactives = document.querySelectorAll("a, button, .project-card");
+
+  interactives.forEach((el) => {
+    el.addEventListener("mouseenter", () => {
+      document.body.classList.add("cursor-hover");
+      // Adjust offset for outline expansion
+      gsap.to(cursorOutline, { x: "-=10", y: "-=10", duration: 0.15 });
+    });
+
+    el.addEventListener("mouseleave", () => {
+      document.body.classList.remove("cursor-hover");
+      gsap.to(cursorOutline, { x: "+=10", y: "+=10", duration: 0.15 });
+    });
+  });
+
+  // Magnetic Button Logic
+  const magneticElements = document.querySelectorAll(".hero-btn");
+
+  magneticElements.forEach((el) => {
+    el.addEventListener("mousemove", (e) => {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      // Move the button slightly towards the cursor
+      gsap.to(el, {
+        x: x * 0.3,
+        y: y * 0.3,
+        duration: 0.4,
+        ease: "power2.out"
+      });
+
+      // Move the icon/content inside even more to create parallax
+      const icon = el.querySelector("i, svg");
+      if (icon) {
+        gsap.to(icon, {
+          x: x * 0.2,
+          y: y * 0.2,
+          duration: 0.4,
+          ease: "power2.out"
+        });
+      }
+    });
+
+    el.addEventListener("mouseleave", () => {
+      // Reset position
+      gsap.to(el, {
+        x: 0,
+        y: 0,
+        duration: 0.7,
+        ease: "elastic.out(1, 0.3)"
+      });
+
+      const icon = el.querySelector("i, svg");
+      if (icon) {
+        gsap.to(icon, {
+          x: 0,
+          y: 0,
+          duration: 0.7,
+          ease: "elastic.out(1, 0.3)"
+        });
+      }
+    });
+  });
+});
+
+// ======================================================
+// KINETIC TYPOGRAPHY SCROLL
+// ======================================================
+document.addEventListener("DOMContentLoaded", () => {
+  const track = document.querySelector(".kinetic-track");
+
+  if (track) {
+    // Parallax scrolling for the marquee
+    gsap.to(track, {
+      xPercent: -50,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".kinetic-section",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1 // smooth scrubbing
+      }
+    });
+  }
+});
+
+// ======================================================
+// DEVELOPER MODE TOGGLE
+// ======================================================
+document.addEventListener("DOMContentLoaded", () => {
+  const devToggle = document.getElementById("dev-mode-toggle");
+
+  if (devToggle) {
+    // Check local storage for preference
+    if (localStorage.getItem("devMode") === "enabled") {
+      document.body.classList.add("dev-mode");
+    }
+
+    devToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dev-mode");
+
+      if (document.body.classList.contains("dev-mode")) {
+        localStorage.setItem("devMode", "enabled");
+      } else {
+        localStorage.setItem("devMode", "disabled");
+      }
+    });
+  }
+});
