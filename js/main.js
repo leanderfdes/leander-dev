@@ -5,15 +5,46 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize Lucide AFTER DOM is ready
   lucide.createIcons();
 
-  // Hero entrance animation
-  gsap.from(".hero-content > *", {
+  // Hero entrance animation (Advanced)
+  gsap.from(".hero-title", {
     opacity: 0,
-    y: 30,
-    duration: 0.9,
-    ease: "power2.out",
-    stagger: 0.15
+    y: 50,
+    rotationX: -45,
+    duration: 1.2,
+    ease: "back.out(1.5)",
+    transformOrigin: "bottom center"
   });
 
+  gsap.from(".hero-subtitle", {
+    opacity: 0,
+    y: 30,
+    duration: 1,
+    ease: "power3.out",
+    delay: 0.3
+  });
+
+  gsap.from(".hero-actions .hero-btn", {
+    opacity: 0,
+    y: 40,
+    scale: 0.8,
+    duration: 0.8,
+    ease: "back.out(2)",
+    stagger: 0.1,
+    delay: 0.5
+  });
+
+});
+
+// Advanced Parallax for About Image
+gsap.to(".about-image-frame", {
+  yPercent: 20,
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".about-layout",
+    start: "top bottom",
+    end: "bottom top",
+    scrub: true
+  }
 });
 
 // About + Skills reveal (once, subtle)
@@ -71,32 +102,68 @@ gsap.from(".reveal-right", {
 });
 
 
-// Skills reveal animation
-gsap.from(".reveal-skill", {
-  scrollTrigger: {
-    trigger: ".skills-groups",
-    start: "top 85%",
-    once: true
-  },
-  opacity: 0,
-  y: 24,
-  duration: 0.6,
-  ease: "power2.out",
-  stagger: 0.15
+// Skills reveal animation (Advanced 3D Flip)
+gsap.utils.toArray(".skill-group").forEach((group) => {
+  gsap.from(group.querySelectorAll(".skill-item"), {
+    scrollTrigger: {
+      trigger: group,
+      start: "top 85%",
+      once: true
+    },
+    opacity: 0,
+    rotationY: 90,
+    y: 40,
+    duration: 0.8,
+    ease: "back.out(1.5)",
+    stagger: 0.08
+  });
 });
 
-// Projects reveal
-gsap.from(".reveal-project", {
+// Projects reveal (Advanced 3D entrance)
+gsap.from(".project-card", {
   scrollTrigger: {
     trigger: ".projects-grid",
     start: "top 85%",
     once: true
   },
   opacity: 0,
-  y: 30,
-  duration: 0.7,
-  ease: "power2.out",
-  stagger: 0.18
+  y: 60,
+  rotationX: -15,
+  transformOrigin: "top center",
+  duration: 1,
+  ease: "power3.out",
+  stagger: 0.15
+});
+
+// 3D Hover Tilt effect for Projects
+const projectCards = document.querySelectorAll(".project-card");
+projectCards.forEach(card => {
+  card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    // Calculate rotation relative to center
+    const xPct = (x / rect.width - 0.5) * 2;
+    const yPct = (y / rect.height - 0.5) * 2;
+
+    gsap.to(card, {
+      rotationX: yPct * -5, // max 5 deg
+      rotationY: xPct * 5,
+      transformPerspective: 1000,
+      ease: "power2.out",
+      duration: 0.5
+    });
+  });
+
+  card.addEventListener("mouseleave", () => {
+    gsap.to(card, {
+      rotationX: 0,
+      rotationY: 0,
+      ease: "elastic.out(1, 0.3)",
+      duration: 1
+    });
+  });
 });
 
 document.querySelectorAll(".project-expand").forEach(btn => {
@@ -106,7 +173,7 @@ document.querySelectorAll(".project-expand").forEach(btn => {
   });
 });
 
-// Experience section reveal
+// Experience section reveal (Advanced Slide-in Stagger)
 gsap.from(".experience-card", {
   scrollTrigger: {
     trigger: ".experience-list",
@@ -114,21 +181,25 @@ gsap.from(".experience-card", {
     once: true
   },
   opacity: 0,
-  y: 28,
-  duration: 0.7,
-  ease: "power2.out"
+  x: (index) => (index % 2 === 0 ? -40 : 40), // alternate left/right
+  y: 30,
+  duration: 0.8,
+  ease: "power3.out",
+  stagger: 0.2
 });
 
+// Education reveal
 gsap.fromTo(
   ".education-card",
-  { opacity: 0, y: 24 },
+  { opacity: 0, scale: 0.95, y: 30 },
   {
     opacity: 1,
+    scale: 1,
     y: 0,
-    duration: 0.6,
-    ease: "power2.out",
+    duration: 0.8,
+    ease: "power3.out",
     scrollTrigger: {
-      trigger: ".education-card",
+      trigger: ".education-section",
       start: "top 85%",
       once: true
     }
@@ -158,22 +229,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!cursorDot || !cursorOutline) return;
 
+  // Use gsap.quickTo for performance (creates a highly optimized function)
+  const xToDot = gsap.quickTo(cursorDot, "x", { duration: 0, ease: "none" });
+  const yToDot = gsap.quickTo(cursorDot, "y", { duration: 0, ease: "none" });
+
+  const xToOutline = gsap.quickTo(cursorOutline, "x", { duration: 0.4, ease: "power3.out" });
+  const yToOutline = gsap.quickTo(cursorOutline, "y", { duration: 0.4, ease: "power3.out" });
+
   // Track mouse coordinates
   window.addEventListener("mousemove", (e) => {
     const posX = e.clientX;
     const posY = e.clientY;
 
-    // Dot follows exactly, offsetting for center
-    cursorDot.style.left = `${posX - 4}px`;
-    cursorDot.style.top = `${posY - 4}px`;
-
-    // Outline follows with a slight delay using GSAP
-    gsap.to(cursorOutline, {
-      x: posX - 20, // offset half the width
-      y: posY - 20, // offset half the height
-      duration: 0.15,
-      ease: "power2.out"
-    });
+    // CSS translate(-50%, -50%) handles the centering, so just pass the coordinates
+    xToDot(posX);
+    yToDot(posY);
+    xToOutline(posX);
+    yToOutline(posY);
   });
 
   // Add hover effects for all interactive elements
@@ -182,13 +254,10 @@ document.addEventListener("DOMContentLoaded", () => {
   interactives.forEach((el) => {
     el.addEventListener("mouseenter", () => {
       document.body.classList.add("cursor-hover");
-      // Adjust offset for outline expansion
-      gsap.to(cursorOutline, { x: "-=10", y: "-=10", duration: 0.15 });
     });
 
     el.addEventListener("mouseleave", () => {
       document.body.classList.remove("cursor-hover");
-      gsap.to(cursorOutline, { x: "+=10", y: "+=10", duration: 0.15 });
     });
   });
 
